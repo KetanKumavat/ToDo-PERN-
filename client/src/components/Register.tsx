@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/user/register",
+        "https://todo-pern-n60f.onrender.com/api/v1/user/register",
         {
           username,
           password,
