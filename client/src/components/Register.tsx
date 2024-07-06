@@ -10,7 +10,7 @@ function Login() {
   const userLogin = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      await axios.post(
         "https://todo-pern-n60f.onrender.com/api/v1/user/register",
         {
           username,
