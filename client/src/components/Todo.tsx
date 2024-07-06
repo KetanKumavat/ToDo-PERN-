@@ -20,7 +20,7 @@ const ToDoApp: React.FC = () => {
   const fetchTodos = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/v1/todo/all",
+        "https://todo-pern-n60f.onrender.com/api/v1/todo/all",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -37,7 +37,7 @@ const ToDoApp: React.FC = () => {
     if (task.trim()) {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/v1/todo/add",
+          "https://todo-pern-n60f.onrender.com/api/v1/todo/add",
           { description: task },
           {
             headers: {
@@ -62,7 +62,7 @@ const ToDoApp: React.FC = () => {
     if (editTask.trim()) {
       try {
         const response = await axios.put(
-          `http://localhost:5000/api/v1/todo/${id}/update`,
+          `https://todo-pern-n60f.onrender.com/api/v1/todo/${id}/update`,
           { description: editTask },
           {
             headers: {
@@ -87,7 +87,7 @@ const ToDoApp: React.FC = () => {
 
   const removeTask = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/todo/${id}/delete`, {
+      await axios.delete(`https://todo-pern-n60f.onrender.com/api/v1/todo/${id}/delete`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
