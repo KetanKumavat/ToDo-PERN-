@@ -87,11 +87,14 @@ const ToDoApp: React.FC = () => {
 
   const removeTask = async (id: number) => {
     try {
-      await axios.delete(`https://todo-pern-n60f.onrender.com/api/v1/todo/${id}/delete`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      await axios.delete(
+        `https://todo-pern-n60f.onrender.com/api/v1/todo/${id}/delete`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
       setToDos(toDos.filter((todo) => todo.todo_id !== id));
     } catch (err) {
       console.error(err);
@@ -100,72 +103,82 @@ const ToDoApp: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-400 to-purple-500 p-4">
-      <div className="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          To-Do List
-        </h1>
-        <div className="flex mb-4">
-          <input
-            type="text"
-            value={task}
-            onChange={(e) => setTask(e.target.value)}
-            className="border p-2 flex-grow rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Add a new task"
-          />
+      <div className="flex flex-col w-full max-w-md">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">To-Do List</h1>
           <button
-            onClick={addTask}
-            className="bg-blue-500 text-white p-2 rounded-r-md hover:bg-blue-600 transition-colors">
-            Add
+            onClick={() => (window.location.href = "/")}
+            className="bg-gray-500 text-white p-2 rounded-md hover:bg-gray-600 transition-colors">
+            Go to Home
           </button>
         </div>
-        <ul>
-          {toDos.map((todo) => (
-            <Transition
-              key={todo.todo_id}
-              appear={true}
-              show={true}
-              enter="transition-opacity duration-500"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition-opacity duration-500"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0">
-              <li className="flex justify-between items-center mb-2 bg-gray-100 p-2 rounded-md shadow-sm">
-                {isEditing === todo.todo_id ? (
-                  <input
-                    type="text"
-                    value={editTask}
-                    onChange={(e) => setEditTask(e.target.value)}
-                    className="border p-2 flex-grow rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Edit task"
-                  />
-                ) : (
-                  <span>{todo.description}</span>
-                )}
-                <div>
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
+          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+            To-Do List
+          </h1>
+          <div className="flex mb-4">
+            <input
+              type="text"
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+              className="border p-2 flex-grow rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Add a new task"
+            />
+            <button
+              onClick={addTask}
+              className="bg-blue-500 text-white p-2 rounded-r-md hover:bg-blue-600 transition-colors">
+              Add
+            </button>
+          </div>
+          <ul>
+            {toDos.map((todo) => (
+              <Transition
+                key={todo.todo_id}
+                appear={true}
+                show={true}
+                enter="transition-opacity duration-500"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="transition-opacity duration-500"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0">
+                <li className="flex justify-between items-center mb-2 bg-gray-100 p-2 rounded-md shadow-sm">
                   {isEditing === todo.todo_id ? (
-                    <button
-                      onClick={() => updateTask(todo.todo_id)}
-                      className="bg-green-500 text-white p-1 rounded-md hover:bg-green-600 transition-colors ml-2">
-                      Save
-                    </button>
+                    <input
+                      type="text"
+                      value={editTask}
+                      onChange={(e) => setEditTask(e.target.value)}
+                      className="border p-2 flex-grow rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Edit task"
+                    />
                   ) : (
-                    <button
-                      onClick={() => startEditTask(todo)}
-                      className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-colors ml-2">
-                      Edit
-                    </button>
+                    <span>{todo.description}</span>
                   )}
-                  <button
-                    onClick={() => removeTask(todo.todo_id)}
-                    className="bg-red-500 text-white p-1 rounded-md hover:bg-red-600 transition-colors ml-2">
-                    Remove
-                  </button>
-                </div>
-              </li>
-            </Transition>
-          ))}
-        </ul>
+                  <div>
+                    {isEditing === todo.todo_id ? (
+                      <button
+                        onClick={() => updateTask(todo.todo_id)}
+                        className="bg-green-500 text-white p-1 rounded-md hover:bg-green-600 transition-colors ml-2">
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => startEditTask(todo)}
+                        className="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600 transition-colors ml-2">
+                        Edit
+                      </button>
+                    )}
+                    <button
+                      onClick={() => removeTask(todo.todo_id)}
+                      className="bg-red-500 text-white p-1 rounded-md hover:bg-red-600 transition-colors ml-2">
+                      Remove
+                    </button>
+                  </div>
+                </li>
+              </Transition>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
