@@ -3,7 +3,7 @@ CREATE DATABASE todo;
 
 -- creating todo table with schema
 CREATE TABLE todo(
-    todo_id SERIAL PRIMARY_KEY,
+    todo_id SERIAL PRIMARY KEY,
     description VARCHAR(255) NOT NULL
 );
 

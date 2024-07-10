@@ -7,13 +7,16 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const userLogin = async (e: any) => {
+  const userLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-     const res = await axios.post("https://todo-pern-n60f.onrender.com/api/v1/user/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        "https://todo-pern-n60f.onrender.com/api/v1/user/login",
+        {
+          username,
+          password,
+        }
+      );
       const { token } = res.data;
       localStorage.setItem("accessToken", token);
       //   console.log(res.data);
